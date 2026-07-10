@@ -42,7 +42,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-
+verification: {
+  google: "rsModnJuDIpr6qpvhD_DvlQLDQ0XT7hsR84aevJTRUM",
+},
   robots: {
     index: true,
     follow: true,
