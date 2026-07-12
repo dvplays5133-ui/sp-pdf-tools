@@ -48,7 +48,10 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="bg-white px-6 py-20 sm:py-24">
+    <section
+      id="features"
+      className="bg-white px-6 py-20 sm:py-24"
+    >
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
@@ -75,7 +78,9 @@ export default function Features() {
                 <Icon className="h-6 w-6" />
               </div>
 
-              <h3 className="mt-5 text-xl font-bold text-slate-900">{title}</h3>
+              <h3 className="mt-5 text-xl font-bold text-slate-900">
+                {title}
+              </h3>
 
               <p className="mt-3 text-sm leading-6 text-slate-600">
                 {description}
