@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <text
+    x="80"
+    y="220"
+    fill="white"
+    font-size="72"
+    font-family="Arial"
+    font-weight="bold">
+    SP PDF Tools
+  </text>
+
+  <text
+    x="80"
+    y="300"
+    fill="#d1d5db"
+    font-size="36"
+    font-family="Arial">
+    Merge • Split • Compress • Convert PDF
+  </text>
+
+  <text
+    x="80"
+    y="360"
+    fill="#d1d5db"
+    font-size="32"
+    font-family="Arial">
+    Fast • Secure • Free Online PDF Tools
+  </text>
+
+  <rect
+    x="80"
+    y="430"
+    rx="18"
+    ry="18"
+    width="320"
+    height="70"
+    fill="#8b5cf6"/>
+
+  <text
+    x="120"
+    y="475"
+    fill="white"
+    font-size="34"
+    font-family="Arial"
+    font-weight="bold">
+    sp-pdf-tools.vercel.app
+  </text>
+</svg>

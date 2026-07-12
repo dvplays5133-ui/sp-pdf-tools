@@ -68,6 +68,14 @@ export const metadata: Metadata = {
     title: "SP PDF Tools - Free Online PDF Tools",
     description:
       "Merge, split, compress and convert PDF files online with simple, fast and privacy-focused tools.",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "SP PDF Tools - Free Online PDF Tools",
+      },
+    ],
   },
 
   twitter: {
@@ -75,6 +83,7 @@ export const metadata: Metadata = {
     title: "SP PDF Tools - Free Online PDF Tools",
     description:
       "Merge, split, compress and convert PDF files directly in your browser.",
+    images: ["/og-image.svg"],
   },
 
   verification: {
