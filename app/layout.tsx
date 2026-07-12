@@ -3,43 +3,78 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
+const SITE_URL = "https://sp-pdf-tools.vercel.app";
+const GA_MEASUREMENT_ID = "G-WPZ4ZGKSHV";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+
+  applicationName: "SP PDF Tools",
+
   title: {
     default: "SP PDF Tools - Free Online PDF Tools",
     template: "%s | SP PDF Tools",
   },
+
   description:
-    "Free online PDF tools to merge, split, compress, convert, rotate and manage PDF files securely in your browser.",
+    "Free online PDF tools to merge, split, compress and convert PDF files directly in your browser. Fast, simple and privacy-focused.",
+
   keywords: [
-    "PDF",
-    "Merge PDF",
-    "Split PDF",
-    "Compress PDF",
-    "PDF Tools",
-    "Free PDF Tools",
-    "Online PDF Editor",
+    "PDF tools",
+    "free PDF tools",
+    "online PDF tools",
+    "merge PDF",
+    "split PDF",
+    "compress PDF",
+    "JPG to PDF",
+    "PDF converter",
+    "manage PDF files",
+    "browser PDF tools",
   ],
-  authors: [{ name: "SP PDF Tools" }],
+
+  authors: [
+    {
+      name: "SP PDF Tools",
+      url: SITE_URL,
+    },
+  ],
+
   creator: "SP PDF Tools",
   publisher: "SP PDF Tools",
 
+  category: "technology",
+
+  alternates: {
+    canonical: "/",
+  },
+
   openGraph: {
-    title: "SP PDF Tools",
-    description: "Fast, secure and free online PDF tools.",
-    url: "https://sp-pdf-tools.vercel.app",
-    siteName: "SP PDF Tools",
-    locale: "en_US",
     type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    siteName: "SP PDF Tools",
+    title: "SP PDF Tools - Free Online PDF Tools",
+    description:
+      "Merge, split, compress and convert PDF files online with simple, fast and privacy-focused tools.",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "SP PDF Tools - Free Online PDF Tools",
+    description:
+      "Merge, split, compress and convert PDF files directly in your browser.",
   },
 
   verification: {
@@ -49,6 +84,18 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
   },
 };
 
@@ -62,25 +109,42 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
+      <body className="flex min-h-full flex-col">
         <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-WPZ4ZGKSHV"
+    id="schema-org"
+    type="application/ld+json"
+    strategy="afterInteractive"
+  >
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "SP PDF Tools",
+      url: "https://sp-pdf-tools.vercel.app",
+      logo: "https://sp-pdf-tools.vercel.app/favicon.ico",
+    })}
+  </Script>
+        {children}
+
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
+
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
+
             gtag('js', new Date());
-            gtag('config', 'G-WPZ4ZGKSHV');
+            gtag('config', '${GA_MEASUREMENT_ID}', {
+              page_path: window.location.pathname,
+            });
           `}
         </Script>
-      </head>
-
-      <body className="min-h-full flex flex-col">
-        {children}
       </body>
     </html>
   );
-} 
+}
