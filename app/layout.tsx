@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     "split PDF",
     "compress PDF",
     "JPG to PDF",
+    "Word to PDF",
     "PDF converter",
     "manage PDF files",
     "browser PDF tools",
@@ -53,7 +54,6 @@ export const metadata: Metadata = {
 
   creator: "SP PDF Tools",
   publisher: "SP PDF Tools",
-
   category: "technology",
 
   alternates: {
@@ -97,7 +97,22 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
+
   manifest: "/manifest.json",
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "SP PDF Tools",
+  url: SITE_URL,
+  logo: `${SITE_URL}/favicon.ico`,
+  sameAs: [],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    url: `${SITE_URL}/contact`,
+  },
 };
 
 export default function RootLayout({
@@ -112,18 +127,13 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <Script
-    id="schema-org"
-    type="application/ld+json"
-    strategy="afterInteractive"
-  >
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "SP PDF Tools",
-      url: "https://sp-pdf-tools.vercel.app",
-      logo: "https://sp-pdf-tools.vercel.app/favicon.ico",
-    })}
-  </Script>
+          id="schema-org"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify(organizationSchema)}
+        </Script>
+
         {children}
 
         <Script
