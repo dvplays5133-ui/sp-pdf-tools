@@ -40,7 +40,8 @@ const tools = [
       "Reduce PDF file size while preserving readable text and image quality.",
     href: "/compress-pdf",
     icon: FileArchive,
-    status: "coming-soon" as const,
+    status: "ready" as const,
+    badge: "New",
   },
   {
     title: "Rotate PDF",
