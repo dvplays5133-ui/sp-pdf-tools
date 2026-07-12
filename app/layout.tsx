@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,7 +12,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 
 export const metadata: Metadata = {
   title: {
@@ -35,16 +35,17 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "SP PDF Tools",
-    description:
-      "Fast, secure and free online PDF tools.",
+    description: "Fast, secure and free online PDF tools.",
     url: "https://sp-pdf-tools.vercel.app",
     siteName: "SP PDF Tools",
     locale: "en_US",
     type: "website",
   },
-verification: {
-  google: "rsModnJuDIpr6qpvhD_DvlQLDQ0XT7hsR84aevJTRUM",
-},
+
+  verification: {
+    google: "rsModnJuDIpr6qpvhD_DvlQLDQ0XT7hsR84aevJTRUM",
+  },
+
   robots: {
     index: true,
     follow: true,
@@ -61,7 +62,25 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-WPZ4ZGKSHV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WPZ4ZGKSHV');
+          `}
+        </Script>
+      </head>
+
+      <body className="min-h-full flex flex-col">
+        {children}
+      </body>
     </html>
   );
-}
+} 
