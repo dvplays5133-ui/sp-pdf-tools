@@ -1,0 +1,16 @@
+{
+  "name": "SP PDF Tools",
+  "short_name": "SP PDF",
+  "description": "Free online PDF tools to merge, split, compress and convert PDF files.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

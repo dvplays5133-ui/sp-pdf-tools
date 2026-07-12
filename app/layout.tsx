@@ -97,6 +97,7 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
