@@ -21,10 +21,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-  url: "https://sp-pdf-tools.vercel.app/compress-pdf",
-  lastModified: new Date(),
-  changeFrequency: "weekly",
-  priority: 0.9,
-},
+      url: "https://sp-pdf-tools.vercel.app/compress-pdf",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: "https://sp-pdf-tools.vercel.app/jpg-to-pdf",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
   ];
 }

@@ -105,7 +105,8 @@ const tools = [
       "Convert JPG, JPEG and PNG images into one professionally arranged PDF.",
     href: "/jpg-to-pdf",
     icon: ImagePlus,
-    status: "coming-soon" as const,
+    status: "ready" as const,
+    badge: "New",
   },
   {
     title: "PDF to JPG",
@@ -139,9 +140,8 @@ export default function ToolGrid() {
           </h2>
 
           <p className="mt-5 text-lg leading-8 text-slate-600">
-            Choose a tool below. Merge PDF and Split PDF are available now, and
-            more professional tools will be added in the next development
-            milestones.
+            Choose a tool below. Merge PDF, Split PDF, Compress PDF and JPG to
+            PDF are available now, with more professional tools coming soon.
           </p>
         </div>
 
