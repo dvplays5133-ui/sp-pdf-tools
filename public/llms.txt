@@ -1,0 +1,16 @@
+SP PDF Tools
+
+Website: https://sp-pdf-tools.vercel.app
+
+SP PDF Tools provides free online PDF utilities including:
+
+- Merge PDF
+- Split PDF
+- Compress PDF
+- JPG to PDF
+- Word to PDF
+
+Files are processed securely and many tools work directly in the browser.
+
+Contact:
+https://sp-pdf-tools.vercel.app/contact
