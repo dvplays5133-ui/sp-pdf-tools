@@ -30,26 +30,40 @@ const toolLinks = [
     href: "/jpg-to-pdf",
     icon: FileImage,
   },
+  {
+    label: "Word to PDF",
+    href: "/word-to-pdf",
+    icon: FileText,
+  },
 ];
 
 const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "FAQ", href: "/faq" },
+  { label: "All Tools", href: "/#tools" },
+  { label: "Features", href: "/#features" },
 ];
 
 const legalLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms & Conditions", href: "/terms" },
   { label: "Disclaimer", href: "/disclaimer" },
+  { label: "Cookie Policy", href: "/cookie-policy" },
+  { label: "DMCA Policy", href: "/dmca" },
+];
+
+const resourceLinks = [
+  { label: "Sitemap", href: "/sitemap.xml" },
+  { label: "Robots.txt", href: "/robots.txt" },
+  { label: "Manifest", href: "/manifest.json" },
 ];
 
 export default function Footer() {
   return (
     <footer className="border-t border-slate-800 bg-slate-950 text-slate-300">
       <div className="mx-auto max-w-7xl px-6 py-14">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="sm:col-span-2 lg:col-span-2">
             <Link href="/" className="inline-flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-950/40">
                 <FileText className="h-6 w-6" />
@@ -63,25 +77,30 @@ export default function Footer() {
               </div>
             </Link>
 
-            <p className="mt-5 max-w-sm text-sm leading-6 text-slate-400">
+            <p className="mt-5 max-w-md text-sm leading-6 text-slate-400">
               Free online tools to merge, split, compress and convert PDF files
-              directly from your browser.
+              directly from your browser. No registration is required.
             </p>
 
             <div className="mt-5 space-y-3 text-sm text-slate-400">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                Secure browser-based processing
+                Privacy-focused browser processing
               </div>
 
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-blue-400" />
-                Built for users worldwide
+                Available to users worldwide
               </div>
 
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-purple-400" />
-                support@sp-pdf-tools.com
+                <Link
+                  href="/contact"
+                  className="transition hover:text-white"
+                >
+                  Contact support
+                </Link>
               </div>
             </div>
           </div>
@@ -123,6 +142,23 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+
+            <h2 className="mt-8 text-sm font-bold uppercase tracking-wider text-white">
+              Resources
+            </h2>
+
+            <ul className="mt-5 space-y-3">
+              {resourceLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <Link
+                    href={href}
+                    className="text-sm text-slate-400 transition hover:text-white"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
@@ -149,8 +185,8 @@ export default function Footer() {
               </p>
 
               <p className="mt-2 text-xs leading-5 text-slate-400">
-                Most files are processed locally inside your browser and are
-                not uploaded to our servers.
+                Many files are processed locally inside your browser. Avoid
+                uploading highly confidential documents to any online service.
               </p>
             </div>
           </div>
@@ -173,8 +209,15 @@ export default function Footer() {
               Terms
             </Link>
 
-            <Link href="/disclaimer" className="transition hover:text-white">
-              Disclaimer
+            <Link
+              href="/cookie-policy"
+              className="transition hover:text-white"
+            >
+              Cookies
+            </Link>
+
+            <Link href="/dmca" className="transition hover:text-white">
+              DMCA
             </Link>
           </div>
         </div>
