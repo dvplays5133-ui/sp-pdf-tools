@@ -1,4 +1,5 @@
 "use client";
+import type { Metadata } from "next";
 
 import Link from "next/link";
 import {
@@ -80,7 +81,14 @@ const breadcrumbSchema = {
     },
   ],
 };
-
+export const metadata: Metadata = {
+  title: "Merge PDF Online Free",
+  description:
+    "Merge multiple PDF files online for free. Combine PDFs securely inside your browser with SP PDF Tools.",
+  alternates: {
+    canonical: "/merge-pdf",
+  },
+};
 export default function MergePdfPage() {
   const [items, setItems] = useState<PdfItem[]>([]);
   const [isDraggingFiles, setIsDraggingFiles] = useState(false);
