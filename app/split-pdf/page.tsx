@@ -458,6 +458,107 @@ export default function SplitPdfPage() {
           </div>
         </section>
       </div>
+      {/* ================= HOW TO USE ================= */}
+
+<section className="mx-auto mt-16 max-w-6xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+  <h2 className="text-3xl font-bold">
+    How to Split PDF Files
+  </h2>
+
+  <div className="mt-6 grid gap-6 md:grid-cols-2">
+    <div>
+      <h3 className="font-semibold text-xl">
+        1. Upload PDF
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Select a PDF file from your computer.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="font-semibold text-xl">
+        2. Choose Pages
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Select the pages or page ranges you want to extract.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="font-semibold text-xl">
+        3. Split Document
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Create separate PDF documents instantly.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="font-semibold text-xl">
+        4. Download
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Download your new PDF files immediately.
+      </p>
+    </div>
+  </div>
+</section>
+
+{/* ================= FAQ ================= */}
+
+<section className="mx-auto mt-12 mb-20 max-w-6xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+  <h2 className="text-3xl font-bold">
+    Frequently Asked Questions
+  </h2>
+
+  <div className="mt-8 space-y-6">
+
+    <div>
+      <h3 className="font-semibold text-xl">
+        Is this Split PDF tool free?
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Yes. You can split PDF files completely free.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="font-semibold text-xl">
+        Are my PDF files uploaded?
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Most PDF processing happens directly in your browser for better privacy.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="font-semibold text-xl">
+        Can I extract only one page?
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Yes. You can extract a single page or multiple pages into a new PDF.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="font-semibold text-xl">
+        Is there any file size limit?
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Large PDFs are supported, although performance depends on your device.
+      </p>
+    </div>
+
+  </div>
+</section>
     </main>
   );
 }
