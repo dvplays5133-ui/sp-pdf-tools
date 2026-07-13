@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   ChangeEvent,
   DragEvent,
@@ -13,6 +14,71 @@ type PdfItem = {
   id: string;
   file: File;
   pageCount: number;
+};
+
+const faqItems = [
+  {
+    question: "Is the Merge PDF tool free?",
+    answer:
+      "Yes. You can combine PDF files with SP PDF Tools without creating an account or paying a fee.",
+  },
+  {
+    question: "Are my PDF files uploaded to a server?",
+    answer:
+      "The merging process is completed directly inside your browser. Your selected files are not intentionally uploaded to our servers for merging.",
+  },
+  {
+    question: "How many PDF files can I merge?",
+    answer:
+      "You can select multiple PDF documents. The practical limit depends on your device memory, browser and the size of the selected files.",
+  },
+  {
+    question: "Can I change the order of the PDF files?",
+    answer:
+      "Yes. Drag the file cards or use the Up and Down buttons to arrange the documents before merging.",
+  },
+  {
+    question: "Can password-protected PDFs be merged?",
+    answer:
+      "Password-protected or encrypted PDF files may not work. Remove the password only when you are authorized to do so and then try again.",
+  },
+  {
+    question: "Does Merge PDF work on mobile devices?",
+    answer:
+      "The tool can work in compatible modern mobile browsers, although larger PDF files may perform better on a desktop or laptop.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://sp-pdf-tools.vercel.app",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Merge PDF",
+      item: "https://sp-pdf-tools.vercel.app/merge-pdf",
+    },
+  ],
 };
 
 export default function MergePdfPage() {
@@ -259,6 +325,20 @@ export default function MergePdfPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-purple-600/25 blur-3xl" />
         <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-blue-600/25 blur-3xl" />
@@ -269,18 +349,36 @@ export default function MergePdfPage() {
         <Navbar showBackButton />
 
         <section className="mx-auto max-w-6xl px-6 py-16">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-8 text-sm text-slate-400"
+          >
+            <ol className="flex flex-wrap items-center gap-2">
+              <li>
+                <Link href="/" className="transition hover:text-white">
+                  Home
+                </Link>
+              </li>
+
+              <li aria-hidden="true">/</li>
+
+              <li className="text-slate-200">Merge PDF</li>
+            </ol>
+          </nav>
+
           <div className="mb-10 text-center">
             <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/30 to-blue-500/30 text-4xl">
               📚
             </div>
 
             <h1 className="text-4xl font-bold md:text-5xl">
-              Merge PDF Files
+              Merge PDF Files Online
             </h1>
 
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-400">
-              Add multiple PDF files, arrange them in the required order,
-              and download one combined document.
+              Combine multiple PDF files into one organized document. Add your
+              files, arrange them in the required order and download the merged
+              PDF directly from your browser.
             </p>
           </div>
 
@@ -307,7 +405,7 @@ export default function MergePdfPage() {
               </h2>
 
               <p className="mt-3 text-slate-400">
-                Or click inside this box to select files
+                Or click inside this box to select multiple PDF files
               </p>
 
               <span className="mt-6 inline-block rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 px-7 py-3.5 font-semibold shadow-lg shadow-purple-500/20">
@@ -482,10 +580,203 @@ export default function MergePdfPage() {
                 <div className="text-2xl">↕️</div>
                 <p className="mt-2 text-sm font-semibold">Reorder</p>
                 <p className="mt-1 text-xs text-slate-500">
-                  Drag files into the required order
+                  Arrange files in the required order
                 </p>
               </div>
             </div>
+          </div>
+
+          <section className="mt-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-widest text-purple-300">
+                Simple process
+              </p>
+
+              <h2 className="mt-4 text-3xl font-bold">
+                How to merge PDF files online
+              </h2>
+
+              <p className="mt-4 leading-7 text-slate-400">
+                Combine documents in three straightforward steps without
+                installing desktop software.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  number: "1",
+                  title: "Select PDF files",
+                  description:
+                    "Choose two or more PDF documents from your device or drag them into the upload area.",
+                },
+                {
+                  number: "2",
+                  title: "Arrange the order",
+                  description:
+                    "Drag the file cards or use the movement buttons to determine the final page sequence.",
+                },
+                {
+                  number: "3",
+                  title: "Merge and download",
+                  description:
+                    "Select the merge button and download the newly combined PDF document.",
+                },
+              ].map((step) => (
+                <article
+                  key={step.number}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 text-lg font-bold">
+                    {step.number}
+                  </div>
+
+                  <h3 className="mt-5 text-xl font-semibold">
+                    {step.title}
+                  </h3>
+
+                  <p className="mt-3 leading-7 text-slate-400">
+                    {step.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-20 rounded-3xl border border-white/10 bg-white/5 p-7 md:p-10">
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-widest text-blue-300">
+                  Free PDF combiner
+                </p>
+
+                <h2 className="mt-4 text-3xl font-bold">
+                  Combine PDFs without complicated software
+                </h2>
+
+                <p className="mt-5 leading-8 text-slate-400">
+                  The SP PDF Tools merger is designed for combining reports,
+                  invoices, application documents, scanned records and other
+                  compatible PDF files into one organized document.
+                </p>
+
+                <p className="mt-4 leading-8 text-slate-400">
+                  The processing takes place in your browser, which reduces the
+                  need to transfer documents to a remote server. Processing
+                  speed depends on your device, browser and file size.
+                </p>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[
+                  "No registration required",
+                  "Arrange files before merging",
+                  "Works in modern browsers",
+                  "Immediate PDF download",
+                  "No desktop software",
+                  "Clear and responsive controls",
+                ].map((benefit) => (
+                  <div
+                    key={benefit}
+                    className="rounded-xl border border-white/10 bg-slate-900/50 p-4 text-sm text-slate-300"
+                  >
+                    ✓ {benefit}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="mt-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-widest text-purple-300">
+                Common questions
+              </p>
+
+              <h2 className="mt-4 text-3xl font-bold">
+                Merge PDF frequently asked questions
+              </h2>
+            </div>
+
+            <div className="mx-auto mt-10 max-w-4xl space-y-4">
+              {faqItems.map((item) => (
+                <details
+                  key={item.question}
+                  className="group rounded-2xl border border-white/10 bg-white/5 p-5"
+                >
+                  <summary className="cursor-pointer list-none font-semibold text-white">
+                    <span className="flex items-center justify-between gap-4">
+                      {item.question}
+
+                      <span className="text-xl text-purple-300 transition group-open:rotate-45">
+                        +
+                      </span>
+                    </span>
+                  </summary>
+
+                  <p className="mt-4 leading-7 text-slate-400">
+                    {item.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-20">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold">Explore more PDF tools</h2>
+
+              <p className="mt-4 text-slate-400">
+                Continue managing your documents with other free tools.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  title: "Split PDF",
+                  description: "Separate pages from a PDF document.",
+                  href: "/split-pdf",
+                },
+                {
+                  title: "Compress PDF",
+                  description: "Reduce the size of compatible PDF files.",
+                  href: "/compress-pdf",
+                },
+                {
+                  title: "JPG to PDF",
+                  description: "Combine images into a PDF document.",
+                  href: "/jpg-to-pdf",
+                },
+                {
+                  title: "Word to PDF",
+                  description: "Convert compatible Word documents to PDF.",
+                  href: "/word-to-pdf",
+                },
+              ].map((tool) => (
+                <Link
+                  key={tool.title}
+                  href={tool.href}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-purple-400/50 hover:bg-white/10"
+                >
+                  <h3 className="text-lg font-semibold">{tool.title}</h3>
+
+                  <p className="mt-2 text-sm leading-6 text-slate-400">
+                    {tool.description}
+                  </p>
+
+                  <span className="mt-5 inline-block text-sm font-semibold text-purple-300">
+                    Open tool →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <div className="mt-16 rounded-2xl border border-amber-400/20 bg-amber-500/10 p-5 text-sm leading-7 text-amber-100">
+            Keep backup copies of important documents. Avoid processing highly
+            confidential files through any online service unless you understand
+            and accept the privacy implications.
           </div>
         </section>
       </div>
