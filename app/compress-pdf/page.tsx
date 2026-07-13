@@ -401,6 +401,111 @@ const blob = new Blob([safeBytes.buffer], {
           </div>
         </div>
       </section>
+      {/* ================= HOW TO USE ================= */}
+
+<section className="mx-auto mt-16 max-w-6xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+  <h2 className="text-3xl font-bold">
+    How to Compress PDF Files
+  </h2>
+
+  <div className="mt-6 grid gap-6 md:grid-cols-2">
+
+    <div>
+      <h3 className="text-xl font-semibold">
+        Upload PDF
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Choose the PDF file you want to reduce in size.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-semibold">
+        Compress
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Our tool optimizes your PDF while maintaining good quality.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-semibold">
+        Download
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Save the compressed PDF instantly.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-semibold">
+        Secure
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Most compression is processed locally inside your browser.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+{/* ================= FAQ ================= */}
+
+<section className="mx-auto mt-12 mb-20 max-w-6xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+
+  <h2 className="text-3xl font-bold">
+    Frequently Asked Questions
+  </h2>
+
+  <div className="mt-8 space-y-6">
+
+    <div>
+      <h3 className="text-xl font-semibold">
+        Is Compress PDF free?
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Yes. Compress PDF files online without any cost.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-semibold">
+        Will PDF quality decrease?
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Compression aims to reduce file size while preserving readable quality.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-semibold">
+        Are my files private?
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Most PDF processing takes place directly inside your browser.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-semibold">
+        Can I compress large PDFs?
+      </h3>
+
+      <p className="mt-2 text-slate-400">
+        Yes, although performance depends on your browser and available memory.
+      </p>
+    </div>
+
+  </div>
+
+</section>
     </main>
   );
 }
