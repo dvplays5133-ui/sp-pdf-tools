@@ -81,12 +81,31 @@ const breadcrumbSchema = {
   ],
 };
 
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Merge PDF Online",
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Web",
+  description:
+    "Merge multiple PDF files online for free. Combine PDF documents securely in your browser without uploading them.",
+  url: "https://sp-pdf-tools.vercel.app/merge-pdf",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  provider: {
+    "@type": "Organization",
+    name: "SP PDF Tools",
+    url: "https://sp-pdf-tools.vercel.app",
+  },
+};
+
 export default function MergePdfPage() {
   const [items, setItems] = useState<PdfItem[]>([]);
   const [isDraggingFiles, setIsDraggingFiles] = useState(false);
-  const [draggedItemIndex, setDraggedItemIndex] = useState<number | null>(
-    null
-  );
+  const [draggedItemIndex, setDraggedItemIndex] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -105,13 +124,11 @@ export default function MergePdfPage() {
     }
 
     setMessage("Reading PDF information...");
-
     const newItems: PdfItem[] = [];
 
     for (const file of validFiles) {
       try {
         const fileBytes = await file.arrayBuffer();
-
         const pdfDocument = await PDFDocument.load(fileBytes, {
           ignoreEncryption: false,
         });
@@ -123,7 +140,6 @@ export default function MergePdfPage() {
         });
       } catch (error) {
         console.error(`Unable to read ${file.name}`, error);
-
         setMessage(
           `${file.name} could not be added. It may be damaged or password protected.`
         );
@@ -138,9 +154,7 @@ export default function MergePdfPage() {
 
   function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     const selectedFiles = Array.from(event.target.files ?? []);
-
     void addPdfFiles(selectedFiles);
-
     event.target.value = "";
   }
 
@@ -157,9 +171,7 @@ export default function MergePdfPage() {
   function handleUploadDrop(event: DragEvent<HTMLDivElement>) {
     event.preventDefault();
     setIsDraggingFiles(false);
-
     const droppedFiles = Array.from(event.dataTransfer.files);
-
     void addPdfFiles(droppedFiles);
   }
 
@@ -167,7 +179,6 @@ export default function MergePdfPage() {
     setItems((currentItems) =>
       currentItems.filter((item) => item.id !== itemId)
     );
-
     setMessage("");
   }
 
@@ -181,12 +192,10 @@ export default function MergePdfPage() {
 
     setItems((currentItems) => {
       const updatedItems = [...currentItems];
-
       [updatedItems[index - 1], updatedItems[index]] = [
         updatedItems[index],
         updatedItems[index - 1],
       ];
-
       return updatedItems;
     });
   }
@@ -196,12 +205,10 @@ export default function MergePdfPage() {
 
     setItems((currentItems) => {
       const updatedItems = [...currentItems];
-
       [updatedItems[index], updatedItems[index + 1]] = [
         updatedItems[index + 1],
         updatedItems[index],
       ];
-
       return updatedItems;
     });
   }
@@ -215,10 +222,7 @@ export default function MergePdfPage() {
   }
 
   function handleItemDrop(targetIndex: number) {
-    if (
-      draggedItemIndex === null ||
-      draggedItemIndex === targetIndex
-    ) {
+    if (draggedItemIndex === null || draggedItemIndex === targetIndex) {
       setDraggedItemIndex(null);
       return;
     }
@@ -226,9 +230,7 @@ export default function MergePdfPage() {
     setItems((currentItems) => {
       const updatedItems = [...currentItems];
       const [draggedItem] = updatedItems.splice(draggedItemIndex, 1);
-
       updatedItems.splice(targetIndex, 0, draggedItem);
-
       return updatedItems;
     });
 
@@ -239,7 +241,6 @@ export default function MergePdfPage() {
     if (sizeInBytes < 1024 * 1024) {
       return `${(sizeInBytes / 1024).toFixed(1)} KB`;
     }
-
     return `${(sizeInBytes / 1024 / 1024).toFixed(2)} MB`;
   }
 
@@ -257,7 +258,6 @@ export default function MergePdfPage() {
 
       for (const item of items) {
         const fileBytes = await item.file.arrayBuffer();
-
         const sourcePdf = await PDFDocument.load(fileBytes, {
           ignoreEncryption: false,
         });
@@ -273,7 +273,6 @@ export default function MergePdfPage() {
       }
 
       const mergedPdfBytes = await mergedPdf.save();
-
       const pdfArrayBuffer = mergedPdfBytes.buffer.slice(
         mergedPdfBytes.byteOffset,
         mergedPdfBytes.byteOffset + mergedPdfBytes.byteLength
@@ -285,7 +284,6 @@ export default function MergePdfPage() {
 
       const downloadUrl = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
-
       downloadLink.href = downloadUrl;
       downloadLink.download = "merged-document.pdf";
 
@@ -300,7 +298,6 @@ export default function MergePdfPage() {
       setMessage("PDF files merged and downloaded successfully.");
     } catch (error) {
       console.error(error);
-
       setMessage(
         "Unable to merge the files. One PDF may be damaged or password protected."
       );
@@ -335,6 +332,13 @@ export default function MergePdfPage() {
         }}
       />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(softwareSchema),
+        }}
+      />
+
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-purple-600/25 blur-3xl" />
         <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-blue-600/25 blur-3xl" />
@@ -355,9 +359,7 @@ export default function MergePdfPage() {
                   Home
                 </Link>
               </li>
-
               <li aria-hidden="true">/</li>
-
               <li className="text-slate-200">Merge PDF</li>
             </ol>
           </nav>
@@ -366,11 +368,9 @@ export default function MergePdfPage() {
             <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/30 to-blue-500/30 text-4xl">
               📚
             </div>
-
             <h1 className="text-4xl font-bold md:text-5xl">
               Merge PDF Files Online
             </h1>
-
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-400">
               Combine multiple PDF files into one organized document. Arrange
               them in the required order and download the merged PDF directly
@@ -393,21 +393,17 @@ export default function MergePdfPage() {
               <div className="mb-4 text-6xl">
                 {isDraggingFiles ? "📥" : "📁"}
               </div>
-
               <h2 className="text-2xl font-semibold">
                 {isDraggingFiles
                   ? "Drop your PDF files here"
                   : "Drag and drop PDF files here"}
               </h2>
-
               <p className="mt-3 text-slate-400">
                 Or click inside this box to select multiple PDF files
               </p>
-
               <span className="mt-6 inline-block rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 px-7 py-3.5 font-semibold shadow-lg shadow-purple-500/20">
                 Select PDF Files
               </span>
-
               <input
                 ref={fileInputRef}
                 type="file"
@@ -425,7 +421,6 @@ export default function MergePdfPage() {
                     <h2 className="text-xl font-semibold">
                       Selected PDF files
                     </h2>
-
                     <p className="mt-1 text-sm text-slate-400">
                       Drag the cards to change the merging order.
                     </p>
@@ -435,15 +430,12 @@ export default function MergePdfPage() {
                     <span className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm">
                       {items.length} files
                     </span>
-
                     <span className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm">
                       {totalPages} pages
                     </span>
-
                     <span className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm">
                       {formatFileSize(totalSize)}
                     </span>
-
                     <button
                       type="button"
                       onClick={clearAllFiles}
@@ -484,7 +476,6 @@ export default function MergePdfPage() {
                               {item.pageCount}{" "}
                               {item.pageCount === 1 ? "page" : "pages"}
                             </span>
-
                             <span className="rounded-md bg-white/5 px-2 py-1">
                               {formatFileSize(item.file.size)}
                             </span>
@@ -499,7 +490,6 @@ export default function MergePdfPage() {
                             >
                               ↑ Up
                             </button>
-
                             <button
                               type="button"
                               onClick={() => moveItemDown(index)}
@@ -508,7 +498,6 @@ export default function MergePdfPage() {
                             >
                               ↓ Down
                             </button>
-
                             <button
                               type="button"
                               onClick={() => removeItem(item.id)}
@@ -574,7 +563,6 @@ export default function MergePdfPage() {
               <p className="text-sm font-semibold uppercase tracking-widest text-purple-300">
                 Simple process
               </p>
-
               <h2 className="mt-4 text-3xl font-bold">
                 How to merge PDF files online
               </h2>
@@ -608,11 +596,9 @@ export default function MergePdfPage() {
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 text-lg font-bold">
                     {step.number}
                   </div>
-
                   <h3 className="mt-5 text-xl font-semibold">
                     {step.title}
                   </h3>
-
                   <p className="mt-3 leading-7 text-slate-400">
                     {step.description}
                   </p>
@@ -626,7 +612,6 @@ export default function MergePdfPage() {
               <p className="text-sm font-semibold uppercase tracking-widest text-purple-300">
                 Common questions
               </p>
-
               <h2 className="mt-4 text-3xl font-bold">
                 Merge PDF frequently asked questions
               </h2>
@@ -641,13 +626,11 @@ export default function MergePdfPage() {
                   <summary className="cursor-pointer list-none font-semibold">
                     <span className="flex items-center justify-between gap-4">
                       {item.question}
-
                       <span className="text-xl text-purple-300 transition group-open:rotate-45">
                         +
                       </span>
                     </span>
                   </summary>
-
                   <p className="mt-4 leading-7 text-slate-400">
                     {item.answer}
                   </p>
@@ -665,22 +648,10 @@ export default function MergePdfPage() {
 
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                {
-                  title: "Split PDF",
-                  href: "/split-pdf",
-                },
-                {
-                  title: "Compress PDF",
-                  href: "/compress-pdf",
-                },
-                {
-                  title: "JPG to PDF",
-                  href: "/jpg-to-pdf",
-                },
-                {
-                  title: "Word to PDF",
-                  href: "/word-to-pdf",
-                },
+                { title: "Split PDF", href: "/split-pdf" },
+                { title: "Compress PDF", href: "/compress-pdf" },
+                { title: "JPG to PDF", href: "/jpg-to-pdf" },
+                { title: "Word to PDF", href: "/word-to-pdf" },
               ].map((tool) => (
                 <Link
                   key={tool.title}
@@ -690,7 +661,6 @@ export default function MergePdfPage() {
                   <h3 className="text-lg font-semibold">
                     {tool.title}
                   </h3>
-
                   <span className="mt-5 inline-block text-sm font-semibold text-purple-300">
                     Open tool →
                   </span>
