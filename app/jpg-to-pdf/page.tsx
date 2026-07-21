@@ -4,6 +4,8 @@ import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import { useDropzone } from "react-dropzone";
 import { jsPDF } from "jspdf";
+import Navbar from "@/components/Navbar";
+import JsonLd from "@/components/seo/JsonLd";
 import {
   ArrowDown,
   ArrowLeft,
@@ -32,7 +34,28 @@ const marginMap: Record<MarginSize, number> = {
   small: 10,
   large: 20,
 };
-
+const faqItems = [
+  {
+    question: "Is JPG to PDF free?",
+    answer:
+      "Yes. You can convert JPG, JPEG and PNG images into a PDF without paying or creating an account.",
+  },
+  {
+    question: "Can I combine multiple images into one PDF?",
+    answer:
+      "Yes. You can add multiple JPG, JPEG or PNG images, arrange their order and export them as one PDF document.",
+  },
+  {
+    question: "Are my images uploaded to a server?",
+    answer:
+      "The conversion is performed directly inside your browser, so your selected images are not intentionally uploaded for processing.",
+  },
+  {
+    question: "Can I choose the page size and orientation?",
+    answer:
+      "Yes. You can choose A4, Letter or original image size, along with portrait or landscape orientation and different margin options.",
+  },
+];
 function formatBytes(bytes: number) {
   if (bytes === 0) return "0 Bytes";
 
@@ -218,9 +241,34 @@ export default function JpgToPdfPage() {
       setIsProcessing(false);
     }
   }
+  const siteUrl = "https://sp-pdf-tools.vercel.app";
 
+  const breadcrumbs = [
+    {
+      name: "Home",
+      item: siteUrl,
+    },
+    {
+      name: "JPG to PDF",
+      item: `${siteUrl}/jpg-to-pdf`,
+    },
+  ];
   return (
     <main className="min-h-screen bg-slate-50">
+      <JsonLd
+  organization={{
+    name: "SP PDF Tools",
+    url: "https://sp-pdf-tools.vercel.app",
+  }}
+  software={{
+    name: "JPG to PDF",
+    description:
+      "Convert JPG, JPEG and PNG images into one PDF online for free with SP PDF Tools.",
+    url: "https://sp-pdf-tools.vercel.app/jpg-to-pdf",
+  }}
+  breadcrumbs={breadcrumbs}
+  faqs={faqItems}
+/>
       <section className="border-b border-slate-200 bg-white px-6 py-5">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <Link

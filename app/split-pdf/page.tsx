@@ -9,6 +9,7 @@ import {
 } from "react";
 import { PDFDocument } from "pdf-lib";
 import Navbar from "@/components/Navbar";
+import JsonLd from "@/components/seo/JsonLd";
 
 type SelectedPdf = {
   file: File;
@@ -47,38 +48,6 @@ const faqItems = [
       "The practical limit depends on your browser, device memory and PDF complexity. Large files may process more smoothly on a desktop computer.",
   },
 ];
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: "https://sp-pdf-tools.vercel.app",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Split PDF",
-      item: "https://sp-pdf-tools.vercel.app/split-pdf",
-    },
-  ],
-};
 
 function formatFileSize(sizeInBytes: number) {
   if (sizeInBytes < 1024 * 1024) {
@@ -346,18 +315,28 @@ export default function SplitPdfPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
+      <JsonLd
+        organization={{
+          name: "SP PDF Tools",
+          url: "https://sp-pdf-tools.vercel.app",
         }}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
+        software={{
+          name: "Split PDF Online",
+          description:
+            "Split PDF files online for free. Extract selected pages or page ranges securely in your browser without uploading them.",
+          url: "https://sp-pdf-tools.vercel.app/split-pdf",
         }}
+        breadcrumbs={[
+          {
+            name: "Home",
+            item: "https://sp-pdf-tools.vercel.app",
+          },
+          {
+            name: "Split PDF",
+            item: "https://sp-pdf-tools.vercel.app/split-pdf",
+          },
+        ]}
+        faqs={faqItems}
       />
 
       <div className="pointer-events-none absolute inset-0">

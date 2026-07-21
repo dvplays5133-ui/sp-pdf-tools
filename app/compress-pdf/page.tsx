@@ -14,6 +14,8 @@ import {
   X,
 } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
+import Navbar from "@/components/Navbar";
+import JsonLd from "@/components/seo/JsonLd";
 
 type CompressionLevel = "low" | "medium" | "high";
 
@@ -38,7 +40,28 @@ const compressionOptions: {
     description: "Maximum reduction with lower visual quality.",
   },
 ];
-
+const faqItems = [
+  {
+    question: "Is Compress PDF free?",
+    answer:
+      "Yes. You can compress compatible PDF files online without creating an account or paying a fee.",
+  },
+  {
+    question: "Will PDF quality decrease?",
+    answer:
+      "Compression aims to reduce file size while preserving readable quality. The final result depends on the original PDF structure and content.",
+  },
+  {
+    question: "Are my PDF files private?",
+    answer:
+      "The compression process is performed directly inside your browser. Your selected PDF is not intentionally uploaded to our servers for processing.",
+  },
+  {
+    question: "Can I compress large PDF files?",
+    answer:
+      "You can process PDF files up to 50 MB. Performance also depends on your browser, device memory and document complexity.",
+  },
+];
 function formatBytes(bytes: number) {
   if (bytes === 0) return "0 Bytes";
 
@@ -157,9 +180,34 @@ const blob = new Blob([safeBytes.buffer], {
       inputRef.current.value = "";
     }
   }
+  const siteUrl = "https://sp-pdf-tools.vercel.app";
 
+  const breadcrumbs = [
+  {
+    name: "Home",
+    item: siteUrl,
+  },
+  {
+    name: "Compress PDF",
+    item: `${siteUrl}/compress-pdf`,
+  },
+];
   return (
     <main className="min-h-screen bg-slate-50">
+      <JsonLd
+  organization={{
+    name: "SP PDF Tools",
+    url: "https://sp-pdf-tools.vercel.app",
+  }}
+  software={{
+    name: "Compress PDF",
+    description:
+      "Compress PDF files online for free. Reduce PDF file size quickly and securely with SP PDF Tools.",
+    url: "https://sp-pdf-tools.vercel.app/compress-pdf",
+  }}
+  breadcrumbs={breadcrumbs}
+  faqs={faqItems}
+/>
       <section className="border-b border-slate-200 bg-white px-6 py-5">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <Link

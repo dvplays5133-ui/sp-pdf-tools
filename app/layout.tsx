@@ -136,6 +136,12 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <Script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5202287028759005"
+  crossOrigin="anonymous"
+  strategy="afterInteractive"
+/>
+        <Script
           id="schema-org"
           type="application/ld+json"
           strategy="afterInteractive"

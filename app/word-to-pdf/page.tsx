@@ -14,10 +14,32 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 import { jsPDF } from "jspdf";
-
+import Navbar from "@/components/Navbar";
+import JsonLd from "@/components/seo/JsonLd";
 type PageSize = "a4" | "letter";
 type Orientation = "portrait" | "landscape";
-
+const faqItems = [
+  {
+    question: "Is Word to PDF free?",
+    answer:
+      "Yes. You can convert supported DOCX files into PDF without paying or creating an account.",
+  },
+  {
+    question: "Which Word files are supported?",
+    answer:
+      "This tool supports modern Microsoft Word DOCX files. Older DOC files are not supported.",
+  },
+  {
+    question: "Are my Word documents private?",
+    answer:
+      "The document is processed directly inside your browser and is not intentionally uploaded to our servers for conversion.",
+  },
+  {
+    question: "Will the PDF look exactly like the Word document?",
+    answer:
+      "Common text, headings, lists, tables and images are supported, but complex layouts, special fonts, headers, footers and advanced formatting may appear differently.",
+  },
+];
 function formatBytes(bytes: number) {
   if (bytes === 0) return "0 Bytes";
 
@@ -170,9 +192,34 @@ export default function WordToPdfPage() {
       setIsConverting(false);
     }
   }
+  const siteUrl = "https://sp-pdf-tools.vercel.app";
 
+  const breadcrumbs = [
+    {
+      name: "Home",
+      item: siteUrl,
+    },
+    {
+      name: "Word to PDF",
+      item: `${siteUrl}/word-to-pdf`,
+    },
+  ];
   return (
     <main className="min-h-screen bg-slate-50">
+      <JsonLd
+  organization={{
+    name: "SP PDF Tools",
+    url: "https://sp-pdf-tools.vercel.app",
+  }}
+  software={{
+    name: "Word to PDF",
+    description:
+      "Convert Microsoft Word DOCX documents into PDF online for free with SP PDF Tools.",
+    url: "https://sp-pdf-tools.vercel.app/word-to-pdf",
+  }}
+  breadcrumbs={breadcrumbs}
+  faqs={faqItems}
+/>
       <section className="border-b border-slate-200 bg-white px-6 py-5">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <Link
