@@ -9,7 +9,7 @@ import {
 } from "react";
 import { PDFDocument } from "pdf-lib";
 import Navbar from "@/components/Navbar";
-
+import JsonLd from "@/components/seo/JsonLd";
 type PdfItem = {
   id: string;
   file: File;
@@ -48,59 +48,6 @@ const faqItems = [
       "Yes, it works in compatible modern mobile browsers. Large files may perform better on a computer.",
   },
 ];
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: "https://sp-pdf-tools.vercel.app",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Merge PDF",
-      item: "https://sp-pdf-tools.vercel.app/merge-pdf",
-    },
-  ],
-};
-
-const softwareSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Merge PDF Online",
-  applicationCategory: "UtilitiesApplication",
-  operatingSystem: "Web",
-  description:
-    "Merge multiple PDF files online for free. Combine PDF documents securely in your browser without uploading them.",
-  url: "https://sp-pdf-tools.vercel.app/merge-pdf",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-  },
-  provider: {
-    "@type": "Organization",
-    name: "SP PDF Tools",
-    url: "https://sp-pdf-tools.vercel.app",
-  },
-};
 
 export default function MergePdfPage() {
   const [items, setItems] = useState<PdfItem[]>([]);
@@ -318,26 +265,29 @@ export default function MergePdfPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareSchema),
-        }}
-      />
+    <JsonLd
+  organization={{
+    name: "SP PDF Tools",
+    url: "https://sp-pdf-tools.vercel.app",
+  }}
+  software={{
+    name: "Merge PDF Online",
+    description:
+      "Merge multiple PDF files online for free. Combine PDF documents securely in your browser without uploading them.",
+    url: "https://sp-pdf-tools.vercel.app/merge-pdf",
+  }}
+  breadcrumbs={[
+    {
+      name: "Home",
+      item: "https://sp-pdf-tools.vercel.app",
+    },
+    {
+      name: "Merge PDF",
+      item: "https://sp-pdf-tools.vercel.app/merge-pdf",
+    },
+  ]}
+  faqs={faqItems}
+/>
 
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-purple-600/25 blur-3xl" />
